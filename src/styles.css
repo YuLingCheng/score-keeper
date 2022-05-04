@@ -24,7 +24,7 @@ body {
   font-size: 5vw;
   width: 100%;
   border: none;
-  padding: none;
+  padding: 0;
   text-align: center;
   word-break: break-all;
   grid-column: span 2;
@@ -132,7 +132,7 @@ footer {
   color: white;
   background: rgb(0, 57, 57);
   border: none;
-  height: 10vw;
+  height: calc(10vw + 1rem);
   font-family: "Courier New", Courier, monospace;
   text-transform: uppercase;
   font-weight: bold;
