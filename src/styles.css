@@ -1,0 +1,111 @@
+.App {
+  font-family: "Courier New", Courier, monospace;
+  text-align: center;
+  width: 100%;
+  padding-top: 2rem;
+}
+
+.score-table {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 2rem 4rem;
+}
+
+.team-name {
+  font-family: "Courier New", Courier, monospace;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 5vw;
+  width: 100%;
+  border: none;
+  padding: none;
+  text-align: center;
+  word-break: break-all;
+  grid-column: span 2;
+}
+
+::-webkit-scrollbar {
+  width: 0; /* Remove scrollbar space */
+  background: transparent; /* Optional: just make scrollbar invisible */
+}
+
+.score {
+  grid-column: span 2;
+}
+.score button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  border: none;
+  width: 100%;
+  height: min(40vw, 40vh);
+  font-family: "Courier New", Courier, monospace;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: min(20vw, 20vh);
+  padding: 0;
+  margin: 0;
+}
+.score button.a {
+  background: rgb(2, 77, 168);
+}
+.score button.b {
+  background: rgb(168, 2, 45);
+}
+
+.adjustment.b {
+  display: flex;
+  justify-content: flex-end;
+}
+.adjustment button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  color: white;
+  background: darkgray;
+  border: none;
+  width: 10vw;
+  height: 10vw;
+  font-family: "Courier New", Courier, monospace;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 3rem;
+}
+.actions {
+  grid-column: span 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-score p {
+  font-size: 11vw;
+  font-weight: bold;
+  margin: 0;
+}
+
+footer {
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+.action {
+  font-family: "Courier New", Courier, monospace;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1rem;
+  background: darkgreen;
+  color: white;
+  border: none;
+  padding: 0.5rem;
+}
+
+.action.secondary {
+  color: darkgray;
+  background: white;
+}
