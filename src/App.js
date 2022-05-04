@@ -5,18 +5,16 @@ import "./styles.css";
 export default function App() {
   const [nameA, setNameA] = useState("Team A");
   const [nameB, setNameB] = useState("Team B");
-  const [scoreA, setScoreA] = useState(0);
-  const [scoreB, setScoreB] = useState(0);
   const [displayValidateGame, setDisplayValidateGame] = useState(false);
-  const [gameScore, setGameScore] = useState([]);
+  const [gameScore, setGameScore] = useState({ a: 0, b: 0, sets: [] });
 
   useEffect(() => {
-    if (scoreA > 24 || scoreB > 24) {
+    if (gameScore.a > 24 || gameScore.b > 24) {
       setDisplayValidateGame(true);
       return;
     }
     setDisplayValidateGame(false);
-  }, [scoreA, scoreB]);
+  }, [gameScore.a, gameScore.b]);
 
   return (
     <div className="App">
@@ -37,26 +35,36 @@ export default function App() {
           {nameB}
         </div>
         <div className="score">
-          <button className="a" onClick={() => setScoreA((p) => ++p)}>
-            {scoreA}
+          <button
+            className="a"
+            onClick={() => setGameScore((p) => ({ ...p, a: ++p.a }))}
+          >
+            {gameScore.a}
           </button>
         </div>
         <div className="score">
-          <button className="b" onClick={() => setScoreB((p) => ++p)}>
-            {scoreB}
+          <button
+            className="b"
+            onClick={() => setGameScore((p) => ({ ...p, b: ++p.b }))}
+          >
+            {gameScore.b}
           </button>
         </div>
         <div className="adjustment a">
-          <button onClick={() => setScoreA((p) => --p)}>-</button>
+          <button onClick={() => setGameScore((p) => ({ ...p, a: --p.a }))}>
+            -
+          </button>
         </div>
         <div className="actions">
           {displayValidateGame && (
             <button
               className="action"
               onClick={() => {
-                setGameScore((p) => [...p, [scoreA, scoreB]]);
-                setScoreA(0);
-                setScoreB(0);
+                setGameScore((p) => ({
+                  a: 0,
+                  b: 0,
+                  sets: [...p.sets, [p.a, p.b]],
+                }));
                 setDisplayValidateGame(false);
               }}
             >
@@ -65,18 +73,20 @@ export default function App() {
           )}
         </div>
         <div className="adjustment b">
-          <button onClick={() => setScoreB((p) => --p)}>-</button>
+          <button onClick={() => setGameScore((p) => ({ ...p, b: --p.b }))}>
+            -
+          </button>
         </div>
         <div />
         <div className="game-score">
-          {gameScore.map((score, index) => (
+          {gameScore.sets.map((score, index) => (
             <p key={index} className="a">
               {score[0]}
             </p>
           ))}
         </div>
         <div className="game-score">
-          {gameScore.map((score, index) => (
+          {gameScore.sets.map((score, index) => (
             <p key={index} className="b">
               {score[1]}
             </p>
@@ -93,9 +103,7 @@ export default function App() {
             if (confirmed) {
               setNameA("Team A");
               setNameB("Team B");
-              setScoreA(0);
-              setScoreB(0);
-              setGameScore([]);
+              setGameScore({ a: 0, b: 0, sets: [] });
             }
           }}
         >
