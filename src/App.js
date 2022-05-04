@@ -93,6 +93,7 @@ export default function App() {
               setNameB("Team B");
               setScoreA(0);
               setScoreB(0);
+              setGameScore([]);
             }
           }}
         >
