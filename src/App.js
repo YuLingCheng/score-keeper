@@ -1,12 +1,22 @@
 import { useEffect, useState } from "react";
+import { readScoreFromStorage, saveScoreToStorage } from "./helpers/storage";
 import JinglesPlayer from "./JinglesPlayer";
 import "./styles.css";
+
+const gameScoreKey = "volleyball";
 
 export default function App() {
   const [nameA, setNameA] = useState("Team A");
   const [nameB, setNameB] = useState("Team B");
   const [displayValidateGame, setDisplayValidateGame] = useState(false);
-  const [gameScore, setGameScore] = useState({ a: 0, b: 0, sets: [] });
+  const initialGameScore = readScoreFromStorage(gameScoreKey);
+  const [gameScore, setGameScore] = useState(
+    initialGameScore ?? { a: 0, b: 0, sets: [] }
+  );
+
+  useEffect(() => {
+    saveScoreToStorage(gameScoreKey, gameScore);
+  }, [gameScore]);
 
   useEffect(() => {
     if (gameScore.a > 24 || gameScore.b > 24) {
