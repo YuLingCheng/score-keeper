@@ -1,12 +1,17 @@
+body {
+  margin: 0;
+}
+
 .App {
   font-family: "Courier New", Courier, monospace;
   text-align: center;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .score-table {
-  padding-top: 2rem;
-  width: 100%;
+  padding: 2rem 0.5rem;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 2rem 4rem;
@@ -111,11 +116,10 @@ footer {
 }
 
 .jingles-player {
+  background: darkcyan;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  gap: 2rem;
   box-sizing: border-box;
 }
 
@@ -126,7 +130,7 @@ footer {
   padding: 0 4rem;
   margin: 0;
   color: white;
-  background: darkcyan;
+  background: rgb(0, 57, 57);
   border: none;
   height: 10vw;
   font-family: "Courier New", Courier, monospace;
