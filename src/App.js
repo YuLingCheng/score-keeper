@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import JinglesPlayer from "./JinglesPlayer";
 import "./styles.css";
 
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
 
   return (
     <div className="App">
+      <JinglesPlayer />
       <main className="score-table">
         <div
           className="team-name a"

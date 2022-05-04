@@ -2,10 +2,10 @@
   font-family: "Courier New", Courier, monospace;
   text-align: center;
   width: 100%;
-  padding-top: 2rem;
 }
 
 .score-table {
+  padding-top: 2rem;
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -108,4 +108,29 @@ footer {
 .action.secondary {
   color: darkgray;
   background: white;
+}
+
+.jingles-player {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 2rem;
+  box-sizing: border-box;
+}
+
+.jingle-player button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4rem;
+  margin: 0;
+  color: white;
+  background: darkcyan;
+  border: none;
+  height: 10vw;
+  font-family: "Courier New", Courier, monospace;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1rem;
 }
