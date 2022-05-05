@@ -1,9 +1,17 @@
 import { useEffect, useState } from "react";
 import { readScoreFromStorage, saveScoreToStorage } from "./helpers/storage";
 import JinglesPlayer from "./JinglesPlayer";
+import ScoreAnnouncement from "./ScoreAnnouncement";
 import "./styles.css";
 
 const gameScoreKey = "volleyball";
+const beginingGameScore = {
+  a: 0,
+  b: 0,
+  sets: [],
+  lastPoint: undefined,
+  lang: "fr-FR",
+};
 
 export default function App() {
   const [nameA, setNameA] = useState("Team A");
@@ -11,7 +19,7 @@ export default function App() {
   const [displayValidateGame, setDisplayValidateGame] = useState(false);
   const initialGameScore = readScoreFromStorage(gameScoreKey);
   const [gameScore, setGameScore] = useState(
-    initialGameScore ?? { a: 0, b: 0, sets: [] }
+    initialGameScore ?? beginingGameScore
   );
 
   useEffect(() => {
@@ -47,7 +55,9 @@ export default function App() {
         <div className="score">
           <button
             className="a"
-            onClick={() => setGameScore((p) => ({ ...p, a: ++p.a }))}
+            onClick={() =>
+              setGameScore((p) => ({ ...p, a: ++p.a, lastPoint: "a" }))
+            }
           >
             {gameScore.a}
           </button>
@@ -55,7 +65,9 @@ export default function App() {
         <div className="score">
           <button
             className="b"
-            onClick={() => setGameScore((p) => ({ ...p, b: ++p.b }))}
+            onClick={() =>
+              setGameScore((p) => ({ ...p, b: ++p.b, lastPoint: "b" }))
+            }
           >
             {gameScore.b}
           </button>
@@ -65,22 +77,11 @@ export default function App() {
             -
           </button>
         </div>
-        <div className="actions">
-          {displayValidateGame && (
-            <button
-              className="action"
-              onClick={() => {
-                setGameScore((p) => ({
-                  a: 0,
-                  b: 0,
-                  sets: [...p.sets, [p.a, p.b]],
-                }));
-                setDisplayValidateGame(false);
-              }}
-            >
-              Validate score
-            </button>
-          )}
+        <div className="read-score">
+          <ScoreAnnouncement lang={gameScore.lang}>
+            {gameScore[gameScore.lastPoint ?? "a"]}-
+            {gameScore[gameScore.lastPoint === "a" ? "b" : "a"]}
+          </ScoreAnnouncement>
         </div>
         <div className="adjustment b">
           <button onClick={() => setGameScore((p) => ({ ...p, b: --p.b }))}>
@@ -105,20 +106,68 @@ export default function App() {
         <div />
       </main>
       <footer>
-        <div></div>
-        <button
-          className="action secondary"
-          onClick={() => {
-            const confirmed = window.confirm("Reset score?");
-            if (confirmed) {
-              setNameA("Team A");
-              setNameB("Team B");
-              setGameScore({ a: 0, b: 0, sets: [] });
-            }
-          }}
-        >
-          Reset game
-        </button>
+        <div className="actions">
+          {displayValidateGame && (
+            <button
+              className="action"
+              onClick={() => {
+                setGameScore((p) => ({
+                  ...p,
+                  a: 0,
+                  b: 0,
+                  sets: [...p.sets, [p.a, p.b]],
+                  lastPoint: undefined,
+                }));
+                setDisplayValidateGame(false);
+              }}
+            >
+              End set
+            </button>
+          )}
+        </div>
+        <div>
+          <button
+            className="action secondary"
+            aria-current={gameScore.lang === "fr-FR"}
+            onClick={() => {
+              setGameScore((p) => ({
+                ...p,
+                lang: "fr-FR",
+              }));
+            }}
+          >
+            FR
+          </button>
+          <button
+            className="action secondary"
+            aria-current={gameScore.lang === "en-US"}
+            onClick={() => {
+              setGameScore((p) => ({
+                ...p,
+                lang: "en-US",
+              }));
+            }}
+          >
+            EN
+          </button>
+          <button
+            className="action secondary"
+            onClick={() => {
+              const confirmed = window.confirm("Reset score?");
+              if (confirmed) {
+                setNameA("Team A");
+                setNameB("Team B");
+                setGameScore((p) => ({
+                  ...beginingGameScore,
+                  lang: p.lang ?? beginingGameScore.lang,
+                }));
+              }
+              document.activeElement.blur();
+            }}
+          >
+            Reset game
+          </button>
+        </div>
       </footer>
     </div>
   );
