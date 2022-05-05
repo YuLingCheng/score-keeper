@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { readScoreFromStorage, saveScoreToStorage } from "./helpers/storage";
 import JinglesPlayer from "./JinglesPlayer";
-import ScoreAnnouncement from "./ScoreAnnouncement";
+import ScoreAnnouncement, { defaultLang } from "./ScoreAnnouncement";
 import "./styles.css";
 
 const gameScoreKey = "volleyball";
@@ -10,7 +10,7 @@ const beginingGameScore = {
   b: 0,
   sets: [],
   lastPoint: undefined,
-  lang: "fr-FR",
+  lang: defaultLang,
 };
 
 export default function App() {
@@ -128,18 +128,6 @@ export default function App() {
         <div>
           <button
             className="action secondary"
-            aria-current={gameScore.lang === "fr-FR"}
-            onClick={() => {
-              setGameScore((p) => ({
-                ...p,
-                lang: "fr-FR",
-              }));
-            }}
-          >
-            FR
-          </button>
-          <button
-            className="action secondary"
             aria-current={gameScore.lang === "en-US"}
             onClick={() => {
               setGameScore((p) => ({
@@ -149,6 +137,18 @@ export default function App() {
             }}
           >
             EN
+          </button>
+          <button
+            className="action secondary"
+            aria-current={gameScore.lang === "fr-FR"}
+            onClick={() => {
+              setGameScore((p) => ({
+                ...p,
+                lang: "fr-FR",
+              }));
+            }}
+          >
+            FR
           </button>
           <button
             className="action secondary"

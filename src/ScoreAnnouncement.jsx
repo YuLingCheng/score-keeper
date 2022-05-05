@@ -1,9 +1,10 @@
 import { useRef, useState, useEffect } from "react";
 
 const MAX_RETRY = 5;
+export const defaultLang = "en-US"; // less buggy on all devices
 
 export default function ScoreAnnouncement(props) {
-  const { children, lang = "fr-FR" } = props;
+  const { children, lang = defaultLang } = props;
   const currentScoreRef = useRef(null);
   const tts = window.speechSynthesis;
   const [voices, setVoices] = useState([]);
