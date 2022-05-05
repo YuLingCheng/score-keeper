@@ -2,6 +2,10 @@ body {
   margin: 0;
 }
 
+button {
+  cursor: pointer;
+}
+
 .App {
   font-family: "Courier New", Courier, monospace;
   text-align: center;
@@ -80,7 +84,7 @@ body {
   font-weight: bold;
   font-size: 3rem;
 }
-.actions {
+.read-score {
   grid-column: span 2;
   display: flex;
   align-items: center;
@@ -113,6 +117,11 @@ footer {
 .action.secondary {
   color: darkgray;
   background: white;
+}
+.action.secondary[aria-current="true"],
+.action.secondary:hover,
+.action.secondary:focus {
+  text-decoration: underline;
 }
 
 .jingles-player {
