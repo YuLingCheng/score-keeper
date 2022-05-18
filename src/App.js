@@ -79,7 +79,7 @@ export default function App() {
         </div>
         <div className="read-score">
           <ScoreAnnouncement lang={gameScore.lang}>
-            {gameScore[gameScore.lastPoint ?? "a"]}-
+            {gameScore[gameScore.lastPoint ?? "a"]}{" "}
             {gameScore[gameScore.lastPoint === "a" ? "b" : "a"]}
           </ScoreAnnouncement>
         </div>
