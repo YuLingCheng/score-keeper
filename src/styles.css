@@ -20,6 +20,9 @@ button {
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 2rem 4rem;
 }
+.score-table.reverse {
+  direction: rtl;
+}
 
 .team-name {
   font-family: "Courier New", Courier, monospace;
@@ -33,12 +36,14 @@ button {
   word-break: break-all;
   grid-column: span 2;
 }
+.team-name.shouldServe::before {
+  content: "🏐 ";
+}
 
 ::-webkit-scrollbar {
   width: 0; /* Remove scrollbar space */
   background: transparent; /* Optional: just make scrollbar invisible */
 }
-
 .score {
   grid-column: span 2;
 }
@@ -90,6 +95,9 @@ button {
   align-items: center;
   justify-content: center;
 }
+.hidden {
+  display: none;
+}
 
 .game-score p {
   font-size: 11vw;
@@ -126,13 +134,14 @@ footer {
 
 .jingles-player {
   background: darkcyan;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   align-items: center;
   box-sizing: border-box;
 }
 
 .jingle-player button {
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -19,8 +19,9 @@ export default function App() {
   const [displayValidateGame, setDisplayValidateGame] = useState(false);
   const initialGameScore = readScoreFromStorage(gameScoreKey);
   const [gameScore, setGameScore] = useState(
-    initialGameScore ?? beginingGameScore
+    initialGameScore ?? beginingGameScore,
   );
+  const [isReverseSide, setIsReverseSide] = useState(false);
 
   useEffect(() => {
     saveScoreToStorage(gameScoreKey, gameScore);
@@ -37,16 +38,16 @@ export default function App() {
   return (
     <div className="App">
       <JinglesPlayer />
-      <main className="score-table">
+      <main className={`score-table${isReverseSide ? " reverse" : " "}`}>
         <div
-          className="team-name a"
+          className={`team-name a${gameScore.lastPoint === "a" ? " shouldServe" : ""}`}
           contentEditable="true"
           onInput={(e) => setNameA(e.target.value)}
         >
           {nameA}
         </div>
         <div
-          className="team-name b"
+          className={`team-name b${gameScore.lastPoint === "b" ? " shouldServe" : ""}`}
           contentEditable="true"
           onInput={(e) => setNameB(e.target.value)}
         >
@@ -107,7 +108,7 @@ export default function App() {
       </main>
       <footer>
         <div className="actions">
-          {displayValidateGame && (
+          {displayValidateGame ? (
             <button
               className="action"
               onClick={() => {
@@ -122,6 +123,15 @@ export default function App() {
               }}
             >
               End set
+            </button>
+          ) : (
+            <button
+              className="action secondary"
+              onClick={() => {
+                setIsReverseSide((p) => !p);
+              }}
+            >
+              🔄 Switch side
             </button>
           )}
         </div>

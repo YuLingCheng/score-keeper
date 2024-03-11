@@ -41,10 +41,10 @@ export default function ScoreAnnouncement(props) {
       onClick={() => {
         try {
           const scoreToAnnounce = new SpeechSynthesisUtterance(
-            currentScoreRef.current?.textContent
+            currentScoreRef.current?.textContent,
           );
           scoreToAnnounce.voice = voice;
-          scoreToAnnounce.pitch = 0.6;
+          scoreToAnnounce.pitch = 1;
           scoreToAnnounce.volume = 1;
           tts.speak(scoreToAnnounce);
         } catch (e) {
@@ -52,7 +52,10 @@ export default function ScoreAnnouncement(props) {
         }
       }}
     >
-      🗣 <span ref={currentScoreRef}>{children}</span>
+      🗣 Score
+      <span className="hidden" ref={currentScoreRef}>
+        {children}
+      </span>
     </span>
   );
 }
